@@ -1,0 +1,63 @@
+.fondo-negro {
+    --background: #18181B;
+    background-color: #18181B;
+    color: white;
+  }
+  
+  .tabla-planes table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #ffffff;
+    font-size: 14px;
+    margin-top: 15px;
+  }
+  
+  .tabla-planes th,
+  .tabla-planes td {
+    padding: 12px 8px;
+    text-align: center;
+    border: 1px solid #2A2A2E;
+  }
+  
+  .tabla-planes thead {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: #1F1F22;
+  }
+  
+  .tabla-planes tbody tr:nth-child(even) {
+    background-color: #1F1F22;
+  }
+  
+  .tabla-planes tbody tr:nth-child(odd) {
+    background-color: #2A2A2E;
+  }
+  
+  .tabla-planes .plan {
+    font-weight: bold;
+    color: #FFD015;
+  }
+  
+  .tabla-planes .plan span {
+    display: block;
+    font-size: 12px;
+    color: #CCCCCC;
+  }
+  
+  .icono-verde {
+    color: #4CAF50;
+    font-size: 20px;
+  }
+  
+  .icono-rojo {
+    color: #F44336;
+    font-size: 20px;
+  }
+  
+  .columna-titulo {
+    text-align: left;
+    background-color: #18181B;
+    font-weight: 600;
+  }
+  

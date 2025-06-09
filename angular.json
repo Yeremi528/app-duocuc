@@ -111,7 +111,9 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
+            "styles": ["src/global.scss", "src/theme/variables.scss",
+            "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+          ],
             "scripts": []
           },
           "configurations": {
@@ -136,7 +138,8 @@
   "cli": {
     "schematicCollections": [
       "@ionic/angular-toolkit"
-    ]
+    ],
+    "analytics": "9dd977fe-340a-4cb9-bc27-8ecfb7274bbc"
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {
