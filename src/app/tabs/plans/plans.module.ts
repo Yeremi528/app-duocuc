@@ -8,12 +8,15 @@ import { PlansPageRoutingModule } from './plans-routing.module';
 
 import { PlansPage } from './plans.page';
 
+import {MatCardModule} from '@angular/material/card';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PlansPageRoutingModule
+    PlansPageRoutingModule,
+    MatCardModule
   ],
   declarations: [PlansPage]
 })

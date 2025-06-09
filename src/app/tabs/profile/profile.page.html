@@ -15,9 +15,12 @@
 </ion-menu>
 
 <ion-content id="main-content" class="perfil-container" fullscreen>
-  <ion-button fill="clear" class="menu-button" (click)="openMenu()">
-    <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
-  </ion-button>
+  <mat-toolbar class="toolbar custom-toolbar">
+    <button mat-icon-button class="menu-button" (click)="openMenu()" class="custom-toolbar-button">
+      <ion-icon slot="icon-only" name="menu-outline" class="icon-large"></ion-icon>
+    </button>
+  </mat-toolbar>
+  
   
 
   <div class="perfil-card">

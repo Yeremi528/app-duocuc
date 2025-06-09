@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
 import { UserService } from 'src/app/user.service';
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
