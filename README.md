@@ -1,0 +1,9 @@
+Para ejecutar la aplicación es necesario:
+
+1.- Tener instalado NPM y Node
+
+2.- Ejecutar el siguiente comando: npm install
+
+3.- Tener instalado Ionic a nivel de consola(Ionic CLI)
+
+4.- Correr la aplicación con ionic, siguiente comando: ionic s
