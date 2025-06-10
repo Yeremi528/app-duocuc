@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { createAnimation } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-home',
@@ -8,7 +10,7 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./home.page.scss'],
   standalone: false, 
 })
-export class HomePage implements OnInit {
+export class HomePage implements  AfterViewInit {
 
   email: string = '';
   password: string = '';
@@ -18,14 +20,19 @@ export class HomePage implements OnInit {
     this.navCtrl.navigateForward(['/tabs/plans']);
   }
 
-  ngOnInit(): void {
-      this.route.queryParams.subscribe(params => {
-      // Aquí puedes manejar los parámetros de la URL si es necesario
-      // Por ejemplo, si quieres mostrar el email y la contraseña en la consola:
-      this.email = params['email'] || '';
-      this.password = params['password'] || '';
-      console.log('Email:', this.email);
-      
-  })
+  ngAfterViewInit(): void {
+    const element = document.querySelector('.home-content');
+    if (element) {
+      const fadeInAnimation = createAnimation()
+        .addElement(element)
+        .duration(1000)
+        .easing('ease-in-out')
+        .fromTo('opacity', '0', '1');
+
+      fadeInAnimation.play();
+    }
+
   }
+
+
 }
