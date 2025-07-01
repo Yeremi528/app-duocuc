@@ -16,7 +16,7 @@ import { HomePage } from './home.page';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    MatButtonModule,
+    MatButtonModule
   ],
   declarations: [HomePage]
 })

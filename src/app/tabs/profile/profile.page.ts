@@ -1,6 +1,9 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { createAnimation, MenuController, NavController } from '@ionic/angular';
-import { UserService } from 'src/app/user.service';
+import { AlertController, createAnimation, MenuController, NavController } from '@ionic/angular';
+import { DbserviceService } from 'src/app/dbservice.service';
+
+import { Camera, CameraResultType, CameraSource} from '@capacitor/camera';
+
 
 @Component({
   selector: 'app-profile',
@@ -10,9 +13,17 @@ import { UserService } from 'src/app/user.service';
 })
 export class ProfilePage implements OnInit, AfterViewInit {
 
+  name: string = '';
   email: string = '';
 
-  constructor(private userService: UserService,private menu: MenuController, private navCtrl: NavController) {}
+  capturedImage: string | undefined;
+
+  constructor(
+    private readonly menu: MenuController,
+    private readonly navCtrl: NavController,
+    private readonly dbService: DbserviceService,
+    private readonly alertController: AlertController
+    ) {}
 
   openMenu() {
     this.menu.enable(true, 'first');
@@ -21,7 +32,9 @@ export class ProfilePage implements OnInit, AfterViewInit {
 
   logout() {
     this.menu.close('first');
-    this.navCtrl.navigateRoot('/login');
+    localStorage.removeItem('token'); 
+    localStorage.removeItem('email');
+    this.navCtrl.navigateForward(['/login']);
   }
 
     ngAfterViewInit(): void {
@@ -38,8 +51,45 @@ export class ProfilePage implements OnInit, AfterViewInit {
   
     }
   ngOnInit() {
-    this.email = this.userService.getEmail();
+    this.email = localStorage.getItem('email') || '';
+    this.dbService.getUserByEmail(this.email).then((user: any) => {
+      if (user) {
+        this.name = user.nombre;
+
+      } else {
+        this.presentAlert('Usuario no encontrado');
+      }
+    })
   }
 
+  async captureImage() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Camera, 
+      })
+
+      this.capturedImage = image.dataUrl;
+    }catch(e) {
+      console.log(e)
+      alert("Error al momento de capturar la imagen, por favor intente de nuevo más tarde");
+    }
+
+  }
+
+  async presentAlert(message: string){
+    const alert  = await this.alertController.create({
+      header: 'Mensaje',
+      message: message,
+      buttons: ['OK']
+  })
+  return alert.present();
+}
 
 }
+
+  
+
+

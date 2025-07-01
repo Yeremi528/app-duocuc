@@ -24,8 +24,20 @@
   
 
   <div class="perfil-card">
-    <img class="avatar" src="https://i.pravatar.cc/150?img=12" alt="Foto de perfil" />
-    <h2>Yeremi Araya</h2>
+
+    <img 
+      *ngIf="!capturedImage"
+      (click)="captureImage()" 
+      class="avatar" 
+      src="../../../assets/blank_profile.jpg" 
+      alt="Foto de perfil" 
+    />  
+
+    <div *ngIf="capturedImage" class="image-container">
+      <img [src]="capturedImage"  class="avatar"  alt="foto perfil" >
+    </div>
+
+    <h2> {{name}}</h2>
     <p class="estado-plan">Plan no activo</p>
 
     <div class="info-box">

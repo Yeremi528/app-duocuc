@@ -4,10 +4,13 @@
       <h1>Mechanical-bikes</h1>
       <p>Gestión inteligente para talleres de bicicletas</p>
 
+      <div *ngIf="temp < 11" class="closed-notice">
+        Hoy no atendemos, temperatuda muy baja: {{ temp }}°C
+      </div>
+
       <div class="button-group">
-        <button class="principal-buttom" (click)="plans()"  matButton="elevated" mat-raised-button color="primary">Ver planes</button>
+        <button class="principal-buttom" (click)="plans()" matButton="elevated" mat-raised-button color="primary">Ver planes</button>
       </div>
     </div>
   </div>
-  
 </ion-content>

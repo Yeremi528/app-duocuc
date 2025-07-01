@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular'; 
-import { UserService } from '../user.service';
+import { DbserviceService } from '../dbservice.service';
 
 @Component({
   selector: 'app-register',
@@ -14,8 +14,16 @@ export class RegisterPage  {
   password: string = '';
   confirmPassword: string = '';
 
-  constructor(private userService: UserService,private readonly navCtrl: NavController,private readonly alertController: AlertController) { }
+  constructor(private readonly dbService: DbserviceService,private readonly navCtrl: NavController,private readonly alertController: AlertController) { }
 
+  ngOnInit() {
+    // Inicializar la base de datos
+
+    this.dbService.getIsDBReady().subscribe((isDBReady: boolean) => {
+      if (isDBReady) {
+      }
+    })
+  }
   async mostrarAlerta(message: string) {
     const alert = await this.alertController.create({
       header: 'Error',
@@ -77,15 +85,36 @@ export class RegisterPage  {
       return;
     }
 
-    // Si todas las validaciones son correctas, puedes ir al Home con tu cuenta
-    this.userService.setUser(this.email);  
+
+    localStorage.setItem('token', 'true'); 
+    localStorage.setItem('email', this.email);
+    this.guardarDatos();
     this.navCtrl.navigateForward(['/tabs/home'])}
 
 
   login() {
-    // Navegar a la página de inicio de sesión
     this.navCtrl.navigateForward(['/login']);
   }
+
+  async presentAlert(message: string){
+    const alert  = await this.alertController.create({
+      header: 'Mensaje',
+      message: message,
+      buttons: ['OK']
+  })
+  return alert.present();
+}
+
+  guardarDatos(){
+    this.dbService.insertUser(this.nombre, this.email, this.password)
+      .then(() => {
+        this.presentAlert('Usuario registrado correctamente');
+
+  }).catch(e => {
+        this.presentAlert('Error al registrar el usuario: ' + e.message);
+      }
+      );
+    }
 
 
 }
