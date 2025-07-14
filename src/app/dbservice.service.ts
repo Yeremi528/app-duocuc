@@ -14,7 +14,7 @@ export class DbserviceService {
   private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private sqlite: SQLite, private toastController: ToastController) {
-    this.initDatabase();
+    //this.initDatabase();
    }
 
   private initDatabase(){

@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AlertController, createAnimation, MenuController, NavController } from '@ionic/angular';
-import { DbserviceService } from 'src/app/dbservice.service';
 
 import { Camera, CameraResultType, CameraSource} from '@capacitor/camera';
 
@@ -21,7 +20,6 @@ export class ProfilePage implements OnInit, AfterViewInit {
   constructor(
     private readonly menu: MenuController,
     private readonly navCtrl: NavController,
-    private readonly dbService: DbserviceService,
     private readonly alertController: AlertController
     ) {}
 
@@ -52,14 +50,7 @@ export class ProfilePage implements OnInit, AfterViewInit {
     }
   ngOnInit() {
     this.email = localStorage.getItem('email') || '';
-    this.dbService.getUserByEmail(this.email).then((user: any) => {
-      if (user) {
-        this.name = user.nombre;
-
-      } else {
-        this.presentAlert('Usuario no encontrado');
-      }
-    })
+   
   }
 
   async captureImage() {

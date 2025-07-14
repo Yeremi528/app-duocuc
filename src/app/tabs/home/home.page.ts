@@ -1,5 +1,4 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { NavController,createAnimation } from '@ionic/angular';
 import { WeatherService } from 'src/app/weather.service';
 
@@ -20,7 +19,6 @@ export class HomePage implements  AfterViewInit {
 
   constructor(
     private readonly navCtrl: NavController,
-    private readonly route: ActivatedRoute,
     private weather: WeatherService
   ) { }
   plans(){

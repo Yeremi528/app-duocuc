@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular'; 
-import { DbserviceService } from '../dbservice.service';
 
 @Component({
   selector: 'app-register',
@@ -14,16 +13,9 @@ export class RegisterPage  {
   password: string = '';
   confirmPassword: string = '';
 
-  constructor(private readonly dbService: DbserviceService,private readonly navCtrl: NavController,private readonly alertController: AlertController) { }
+  constructor(private readonly navCtrl: NavController,private readonly alertController: AlertController) { }
 
-  ngOnInit() {
-    // Inicializar la base de datos
 
-    this.dbService.getIsDBReady().subscribe((isDBReady: boolean) => {
-      if (isDBReady) {
-      }
-    })
-  }
   async mostrarAlerta(message: string) {
     const alert = await this.alertController.create({
       header: 'Error',
@@ -88,7 +80,7 @@ export class RegisterPage  {
 
     localStorage.setItem('token', 'true'); 
     localStorage.setItem('email', this.email);
-    this.guardarDatos();
+
     this.navCtrl.navigateForward(['/tabs/home'])}
 
 
@@ -105,16 +97,6 @@ export class RegisterPage  {
   return alert.present();
 }
 
-  guardarDatos(){
-    this.dbService.insertUser(this.nombre, this.email, this.password)
-      .then(() => {
-        this.presentAlert('Usuario registrado correctamente');
-
-  }).catch(e => {
-        this.presentAlert('Error al registrar el usuario: ' + e.message);
-      }
-      );
-    }
 
 
 }
